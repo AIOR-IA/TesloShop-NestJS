@@ -1,4 +1,4 @@
-import { IsArray, IsIn, IsNumber, IsOptional, IsPositive, IsString, MinLength } from "class-validator";
+import { IsArray, IsIn, IsInt, IsNumber, IsOptional, IsPositive, IsString, MinLength } from "class-validator";
 
 export class CreateProductDto {
 
@@ -19,9 +19,9 @@ export class CreateProductDto {
     @IsOptional()
     slug?: string;
 
-    @IsString()
+    @IsInt()
     @IsOptional()
-    stock?: string;
+    stock?: number;
 
     //each true, each value inside the array sshould be a string
     @IsString({ each: true})

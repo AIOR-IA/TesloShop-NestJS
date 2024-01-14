@@ -9,9 +9,9 @@ export class Product {
     @Column('text', {
         unique: true,
     })
-    title:string;
+    title: string;
 
-    @Column('numeric', {
+    @Column('float',{
         default: 0
     })
     price: number;
@@ -23,22 +23,22 @@ export class Product {
     description: string;
 
     @Column('text', {
-        unique:true
+        unique: true
     })
-    slug:string;
+    slug: string;
 
     @Column('int', {
         default: 0
     })
     stock: number;
 
-    @Column('text', {
-        array:true
+    @Column('text',{
+        array: true
     })
-    sizes:string[];
+    sizes: string[];
 
     @Column('text')
-    gender:string;
+    gender: string;
     
 
     //tags
