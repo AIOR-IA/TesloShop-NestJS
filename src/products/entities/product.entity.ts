@@ -42,6 +42,11 @@ export class Product {
     
 
     //tags
+    @Column('text', {
+        array:true,
+        default:[]
+    })
+    tags: string[];
     //images
 
     //Before each Insert
