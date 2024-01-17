@@ -10,6 +10,7 @@ export class ProductImage {
     @Column('text')
     url:string
 
+    // muchas imagenes pueden tener 1 producto
     @ManyToOne(
         () => Product,
         (product) => product.images
