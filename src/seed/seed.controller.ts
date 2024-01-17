@@ -12,7 +12,5 @@ export class SeedController {
     return this.seedService.executeSeed();
   }
 
-  private async insertProducts() {
-    
-  }
+ 
 }
