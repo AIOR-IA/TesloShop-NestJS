@@ -30,7 +30,7 @@ export class ProductsService {
   }
 
   async findAll(paginationDto: PaginationDto) {
-    const { limit, offset } = paginationDto;
+    const { limit = 10, offset = 2 } = paginationDto;
     return await this.productRepository.find({
       skip: offset,
       take: limit
