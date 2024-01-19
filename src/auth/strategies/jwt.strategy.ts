@@ -5,7 +5,9 @@ import { JwtPayload } from "../interfaces/jwt-payload.interface";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { ConfigService } from '@nestjs/config';
-import { UnauthorizedException } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
+
+@Injectable()
 export class JwtStrategy extends PassportStrategy( Strategy ) {
 
     constructor(
@@ -29,7 +31,7 @@ export class JwtStrategy extends PassportStrategy( Strategy ) {
         if( !user ) throw new UnauthorizedException('Token invalid');
 
         if( !user.isActive ) throw new UnauthorizedException('User is Inactive, talk with an admin');
-        
+
         return user;
     }
 }
