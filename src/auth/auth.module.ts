@@ -11,6 +11,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   controllers: [AuthController],
   providers: [AuthService],
   imports: [
+    ConfigModule,
     TypeOrmModule.forFeature([User]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     // JwtModule.register({
@@ -21,9 +22,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        console.log('SECRET' , configService.get('JWT_SECRET'))
         return {
-          secret: process.env.JWT_SECRET,
+          secret: configService.get('JWT_SECRET'),
           signOptions: { expiresIn: '2h' },
         }
       }
