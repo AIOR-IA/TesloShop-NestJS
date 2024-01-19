@@ -1,5 +1,5 @@
 export interface JwtPayload {
-    email: string;
+    id: string;
 
     //Add everything that you need to record
 }
