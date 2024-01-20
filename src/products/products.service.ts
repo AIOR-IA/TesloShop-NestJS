@@ -9,6 +9,7 @@ import { v4 as uuid} from 'uuid'
 import { isUUID } from 'class-validator';
 import { ProductImage } from './entities';
 import { url } from 'inspector';
+import { User } from 'src/auth/entities/user.entity';
 @Injectable()
 export class ProductsService {
 
@@ -24,14 +25,15 @@ export class ProductsService {
     private readonly datasource: DataSource
   ) {}
 
-  async create(createProductDto: CreateProductDto) {
+  async create(createProductDto: CreateProductDto, user: User) {
     try {
 
       const { images = [], ...productDetails } = createProductDto;
 
       const product =  this.productRepository.create({
         ...productDetails,
-        images: images.map( img => this.productImageRepository.create({  url: img }))
+        images: images.map( img => this.productImageRepository.create({  url: img })),
+        user: user
       });
       await this.productRepository.save(product);
       return {...product, images: images};
@@ -89,7 +91,7 @@ export class ProductsService {
     }
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto, user: User) {
 
     const { images, ...toUpdate } = updateProductDto;
 
@@ -111,7 +113,7 @@ export class ProductsService {
 
         product.images = images.map(img => this.productImageRepository.create({ url: img }))
       }
-
+      product.user = user;
       await queryRunner.manager.save(product);
       await queryRunner.commitTransaction();
       await queryRunner.release();

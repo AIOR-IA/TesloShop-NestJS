@@ -26,6 +26,14 @@ export class AuthController {
     return this.authService.loginUser(loginUserDto);
   }
 
+  @Get('checkStatus')
+  @Auth()
+  checkAuthStatus(
+    @GetUser() user: User
+  ) {
+    return this.authService.checkAuthStatus(user)
+  }
+
   @Get('private')
   @UseGuards( AuthGuard() )
   TestingPrivateRoute(
@@ -54,7 +62,7 @@ export class AuthController {
   privateRoute2(
     @GetUser() user:User
   ){
-    return user
+    return user;
   }
 
   @Get('private3')
@@ -62,6 +70,6 @@ export class AuthController {
   privateRoute3(
     @GetUser() user:User
   ){
-    return user
+    return user;
   }
 }
